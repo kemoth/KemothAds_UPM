@@ -1,0 +1,15 @@
+{
+  "name": "com.kemothstudios.kemothads",
+  "version": "1.0.0",
+  "displayName": "Kemoth Ads",
+  "description": "Utility library to show ads in game",
+  "unity": "2017.1",
+  "dependencies": {
+    "com.kemothstudios.utilities": "1.0.0",
+    "com.kemothstudios.eventsystem": "1.0.0"
+ },
+  "author": {
+    "name": "Kemoth Studios",
+    "url": "https://www.kemothstudios.com"
+  }
+}
