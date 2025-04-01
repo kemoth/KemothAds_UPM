@@ -1,6 +1,6 @@
 {
   "name": "com.kemothstudios.kemothads",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "Kemoth Ads",
   "description": "Utility library to show ads in game\nInstall https://github.com/kemoth/EventSystem_UPM.git and https://github.com/kemoth/Utilities_UPM.git",
   "unity": "2017.1",

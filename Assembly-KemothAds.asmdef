@@ -3,8 +3,7 @@
     "rootNamespace": "KemothStudios.KemothAds",
     "references": [
         "GUID:3de5454cfee168f19b05e5df995fadda",
-        "GUID:c409c43419083839a8812b8379ce9546",
-        "GUID:7cc720bbdefb55043a84e01f3f2f2b6d"
+        "GUID:c409c43419083839a8812b8379ce9546"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
