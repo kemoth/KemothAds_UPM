@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KemothAdsConfiguration
   m_EditorClassIdentifier: 
   _showTestAds: 1
-  _canShowInterstitialAds: 0
+  _canShowInterstitialAds: 1
   _interstitialAdUnitID: 
   _canShowRewardedAds: 0
   _rewardedAdUnitID: 

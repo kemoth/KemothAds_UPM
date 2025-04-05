@@ -23,10 +23,15 @@ namespace KemothStudios.KemothAds
         private EventBinding<ShowBannerAdEvent> _showBannerAd;
         private bool _isSDKInitialized;
         private ShowMessageEvent _messageData;
+        
+        private MainThreadDispatcher _mainThreadDispatcher;
 
         private void Start()
         {
             Assert.IsNotNull(_kemothAdsConfiguration, $"Ads configuration not provided to {nameof(KemothAdsManager)}");
+
+            _mainThreadDispatcher = gameObject.AddComponent<MainThreadDispatcher>();
+            
             _configuration = _kemothAdsConfiguration as IKemothAdsConfiguration;
             MobileAds.Initialize(x =>
             {
@@ -96,14 +101,19 @@ namespace KemothStudios.KemothAds
                     _interstitialAd = ad;
                     _interstitialAd.OnAdFullScreenContentClosed += () =>
                     {
-                        EventBus<InterstitialAdCompletedEvent>.RaiseEvent(new InterstitialAdCompletedEvent());
-                        LoadInterstitialAd();
+                        _mainThreadDispatcher.RunOnMainThread(() =>
+                        {
+                            EventBus<InterstitialAdCompletedEvent>.RaiseEvent(new InterstitialAdCompletedEvent());
+                            LoadInterstitialAd(); 
+                        });
                     };
                     _interstitialAd.OnAdFullScreenContentFailed += adError =>
                     {
-                        DebugUtility.LogColored("red", $"Interstitial Ad failed to load: {adError}");
-                        EventBus<InterstitialAdCompletedEvent>.RaiseEvent(new InterstitialAdCompletedEvent());
-                        LoadInterstitialAd();
+                        _mainThreadDispatcher.RunOnMainThread(() =>
+                        {
+                            EventBus<InterstitialAdCompletedEvent>.RaiseEvent(new InterstitialAdCompletedEvent());
+                            LoadInterstitialAd();
+                        });
                     };
                 }
             });
@@ -121,12 +131,15 @@ namespace KemothStudios.KemothAds
                 else
                 {
                     _rewardedAd = ad;
-                    _rewardedAd.OnAdFullScreenContentClosed += LoadRewardedAd;
+                    _rewardedAd.OnAdFullScreenContentClosed += ()=>_mainThreadDispatcher.RunOnMainThread(LoadRewardedAd);
                     _rewardedAd.OnAdFullScreenContentFailed += adErr =>
                     {
-                        DebugUtility.LogColored("red", $"Rewarded Ad failed to load: {adErr}");
-                        EventBus<RewardedAdFailedEvent>.RaiseEvent(new RewardedAdFailedEvent());
-                        LoadRewardedAd();
+                        _mainThreadDispatcher.RunOnMainThread(() =>
+                        {
+                            DebugUtility.LogColored("red", $"Rewarded Ad failed to load: {adErr}");
+                            EventBus<RewardedAdFailedEvent>.RaiseEvent(new RewardedAdFailedEvent());
+                            LoadRewardedAd();
+                        });
                     };
                 }
             });
