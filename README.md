@@ -1,7 +1,12 @@
 # Usage
-## Unity Side
+## Install dependencies
+1. Install [Event System](https://github.com/kemoth/EventSystem_UPM) package by adding `https://github.com/kemoth/EventSystem_UPM` in package manager
+2. Install [Utilities](https://github.com/kemoth/Utilities_UPM) package by adding `https://github.com/kemoth/Utilities_UPM` in package manager
+3. Install [Mobile Ads SDK](https://developers.google.com/admob/unity/quick-start)
+
+## Setup
 1. Create an empty gameobject in scene and add **KemothAdsManager** to it
-2. Drag-Drop **MessageBoxCanvas** prfab from **Packages > KemothAds** folder in side this empty gameobject we created above
+2. Drag-Drop **MessageBoxCanvas** prfab from **Packages > KemothAds** folder inside this empty gameobject we created above
 3. Create ads configuration by right-clicking project window and select `Create > Kemoth Studios > KemothAds > Configuration`
    - Enable **Show Test Ads** while testing game or ads
    - Enabel the the type of ads you want to show
@@ -11,7 +16,7 @@
 **NOTE:**
 > **KemothAdsManager** is not a singleton object
 
-## Programming Side
+## Using package
 This package can show *Interstitial, Banner* and *Reward* ads and we are using [Event Bus](https://youtu.be/4_DTAnigmaQ?si=PDmstGMSgqmc9iwi) pattern to show ads and receive callbacks from them. Below are the examples for all the ads:
 1. **Interstitial Ads**
       - To show an ad call
