@@ -6,7 +6,7 @@
 ## Programming Side
 This package can show *Interstial, Banner* and *Reward* ads and we are using [Event Bus](https://youtu.be/4_DTAnigmaQ?si=PDmstGMSgqmc9iwi) pattern to show ads and receive callbacks from them. Below are the examples for all the ads:
 1. **Interstial Ads**
-   - To show an ad call `EventBus<ShowInterstitialAdEvent>.Raise(new ShowInterstitialAdEvent())`
+      - To show an ad call `EventBus<ShowInterstitialAdEvent>.Raise(new ShowInterstitialAdEvent())`
    - In any case like either user closed the ad or ad could not be shown, we will receive same event, to use that event follow the below code:
      ```c#
      // Create a binding to the event
@@ -30,4 +30,5 @@ This package can show *Interstial, Banner* and *Reward* ads and we are using [Ev
        // code to run after ad is closed ...
      }
      ```
-   - sdfsdf
+2. **Banner Ads**
+3. **Rewarded Ads**
