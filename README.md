@@ -12,8 +12,8 @@
 > **KemothAdsManager** is not a singleton object
 
 ## Programming Side
-This package can show *Interstial, Banner* and *Reward* ads and we are using [Event Bus](https://youtu.be/4_DTAnigmaQ?si=PDmstGMSgqmc9iwi) pattern to show ads and receive callbacks from them. Below are the examples for all the ads:
-1. **Interstial Ads**
+This package can show *Interstitial, Banner* and *Reward* ads and we are using [Event Bus](https://youtu.be/4_DTAnigmaQ?si=PDmstGMSgqmc9iwi) pattern to show ads and receive callbacks from them. Below are the examples for all the ads:
+1. **Interstitial Ads**
       - To show an ad call
         ```c#
         EventBus<ShowInterstitialAdEvent>.Raise(new ShowInterstitialAdEvent());
