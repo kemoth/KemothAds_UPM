@@ -8,6 +8,9 @@
    - If and ad is enabled then assign an **AdUnitID** for it, if test ads are enabled then this is not necessary
 4. Drag-Drop this configuration file in the **Kemoth Ads Configuration** field of the **KemothAdsManager**
 
+**NOTE:**
+> **KemothAdsManager** is not a singleton object
+
 ## Programming Side
 This package can show *Interstial, Banner* and *Reward* ads and we are using [Event Bus](https://youtu.be/4_DTAnigmaQ?si=PDmstGMSgqmc9iwi) pattern to show ads and receive callbacks from them. Below are the examples for all the ads:
 1. **Interstial Ads**
