@@ -21,7 +21,7 @@ This package can show *Interstitial, Banner* and *Reward* ads and we are using [
 1. **Interstitial Ads**
       - To show an ad call
         ```c#
-        EventBus<ShowInterstitialAdEvent>.Raise(new ShowInterstitialAdEvent());
+        EventBus<ShowInterstitialAdEvent>.RaiseEvent(new ShowInterstitialAdEvent());
         ```
    - In any case like either user closed the ad or ad could not be shown, we will receive same event, to use that event follow the below code:
      ```c#
@@ -38,7 +38,7 @@ This package can show *Interstitial, Banner* and *Reward* ads and we are using [
      private void OnDestroy()
      {
        // Unregister binding from event bus
-       EventBus<InterstitialAdCompletedEvent>.UnRegisterBinding(_interstitialAdCompleted);
+       EventBus<InterstitialAdCompletedEvent>.UnregisterBinding(_interstitialAdCompleted);
      }
 
      private void OnInterstialAdCompleted()
@@ -49,16 +49,16 @@ This package can show *Interstitial, Banner* and *Reward* ads and we are using [
 2. **Banner Ads**
    - To show an ad call
      ```c#
-     EventBus<ShowBannerAdEvent>.Raise(new ShowBannerAdEvent);
+     EventBus<ShowBannerAdEvent>.RaiseEvent(new ShowBannerAdEvent);
      ```
    - To hide an ad call
      ```c#
-     EventBus<HideBannerAdEvent>.Raise(new HideBannerAdEvent);
+     EventBus<HideBannerAdEvent>.RaiseEvent(new HideBannerAdEvent);
      ```
 3. **Rewarded Ads**
    - To Show an ad call
      ```c#
-     EventBus<ShowRewardedAdEvent>.Raise(new ShowRewardedAdEvent());
+     EventBus<ShowRewardedAdEvent>.RaiseEvent(new ShowRewardedAdEvent());
      ```
    - If user watched the ad and we need to award them then code below is an example for that:
      ```c#
@@ -75,7 +75,7 @@ This package can show *Interstitial, Banner* and *Reward* ads and we are using [
      private void OnDestroy()
      {
        // Unregister binding from event bus
-       EventBus<RewardedAdCompletedEvent>.UnRegisterBinding(_rewardedAdCompleted);
+       EventBus<RewardedAdCompletedEvent>.UnregisterBinding(_rewardedAdCompleted);
      }
 
      // This method can used without the argument also
@@ -101,7 +101,7 @@ This package can show *Interstitial, Banner* and *Reward* ads and we are using [
      private void OnDestroy()
      {
        // Unregister binding from event bus
-       EventBus<RewardedAdFailedEvent>.UnRegisterBinding(_rewardFailedEvent);
+       EventBus<RewardedAdFailedEvent>.UnregisterBinding(_rewardFailedEvent);
      }
 
      private void OnRewardFailed()
