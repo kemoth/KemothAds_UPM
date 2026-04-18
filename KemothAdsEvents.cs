@@ -5,7 +5,10 @@ namespace KemothStudios.KemothAds
     /// <summary>
     /// Request to show an interstitial Ad
     /// </summary>
-    public struct ShowInterstitialAdEvent : IEvent{}
+    public struct ShowInterstitialAdEvent : IEvent
+    {
+        public IKemothAdsConditionData ConditionData;
+    }
     
     /// <summary>
     /// Showing of interstitial Ad is completed, either user closed it or Ad was failed load

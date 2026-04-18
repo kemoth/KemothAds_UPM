@@ -61,15 +61,4 @@ namespace KemothStudios.KemothAds
         public bool CanShowRewardedAds => _canShowRewardedAds;
         public bool CanShowBannerAds => _canShowBannerAds;
     }
-
-    public interface IKemothAdsConfiguration
-    {
-        bool ShowTestAds { get; }
-        bool CanShowInterstitialAds { get; }
-        string InterstitialAdUnitID { get;}
-        public bool CanShowRewardedAds { get; }
-        string RewardedAdUnitID { get;}
-        public bool CanShowBannerAds { get; }
-        string BannerAdUnitID { get;}
-    }
 }

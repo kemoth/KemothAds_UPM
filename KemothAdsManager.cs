@@ -11,8 +11,11 @@ namespace KemothStudios.KemothAds
     {
         [SerializeField, RequireInterface(typeof(IKemothAdsConfiguration))]
         private Object _kemothAdsConfiguration;
+        [SerializeField, RequireInterface(typeof(IKemothAdsCondition))]
+        private Object kemothAdsCondition;
 
         private IKemothAdsConfiguration _configuration;
+        private IKemothAdsCondition _kemothAdsCondition = new DefaultKemothAdsCondition();
         private InterstitialAd _interstitialAd;
         private RewardedAd _rewardedAd;
         private BannerView _bannerAd;
@@ -33,6 +36,8 @@ namespace KemothStudios.KemothAds
             _mainThreadDispatcher = gameObject.AddComponent<MainThreadDispatcher>();
             
             _configuration = _kemothAdsConfiguration as IKemothAdsConfiguration;
+            if(kemothAdsCondition != null)
+                _kemothAdsCondition = kemothAdsCondition as IKemothAdsCondition;
             MobileAds.Initialize(x =>
             {
                 _isSDKInitialized = true;
@@ -163,7 +168,8 @@ namespace KemothStudios.KemothAds
             }
         }
         
-        private void ShowInterstitialAd()
+
+        private void ShowInterstitialAd(ShowInterstitialAdEvent showAdEvent)
         {
             if (!_configuration.CanShowInterstitialAds)
             {
@@ -171,7 +177,7 @@ namespace KemothStudios.KemothAds
                 return;
             }
 
-            if (_interstitialAd != null && _interstitialAd.CanShowAd())
+            if (_interstitialAd != null && _interstitialAd.CanShowAd() && _kemothAdsCondition.ValidateCondition(showAdEvent.ConditionData))
             {
                 _interstitialAd.Show();
             }
