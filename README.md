@@ -109,3 +109,60 @@ This package can show *Interstitial, Banner* and *Reward* ads and we are using [
        // handle failed reward here ...
      }
      ```
+## Conditional Ads
+We can define conditions for the ads, for example, we only want to show ads after 3rd show request.
+     
+**NOTE:**
+> Currently only **Interstitial Ads** supports this.
+
+Below is a simple example to demonstrate conditional ads usage.
+
+1. **Define condition data**
+   - Conditions require some data to validate and here's how we define it.
+      ```c#
+      public struct TestingAdConditionData : IKemothAdsConditionData
+      {
+         public bool show3Ads;
+      }
+      ```
+      
+2. **Define condition**
+   - Now that we have data, let's make a condition that will use it.
+     ```c#
+      public class TestingAdCondition : MonoBehaviour, IKemothAdsCondition<TestingAdConditionData>
+      {
+         private int _adsCountMax3;
+      
+         public bool ValidateCondition(TestingAdConditionData conditionData)
+         {  
+            if (conditionData.show3Ads)
+            {
+               if (_adsCountMax3++ < 3)
+               return true;
+               _adsCountMax3 = 0;
+            }
+            return false;
+         }
+      
+         public bool ValidateCondition(IKemothAdsConditionData conditionData)
+         {
+            if(conditionData is TestingAdConditionData testingAdConditionData)
+            return ValidateCondition(testingAdConditionData);
+            return false;
+         }
+      }
+     ```
+3. **Assign Condition**
+   - Conditions should be an Unity object bacause it needs to be referenced in **KemothAdsManager**, if you failed to provide a condition, **KemothAdsManager** will use a **DefaultKemothAdsCondition**
+     <img width="934" height="274" alt="image" src="https://github.com/user-attachments/assets/018e3c78-9e21-46df-83a0-a9bb0e0f954d" />
+
+4. **Show Ad**
+   - Now that we have our condition ready, let's show ad which will use this condition
+     ```c#
+      public void ShowCountedInterstitial()
+      {
+         TestingAdConditionData data = new TestingAdConditionData();
+         data.show3Ads = true;
+         EventBus<ShowInterstitialAdEvent>.RaiseEvent(new ShowInterstitialAdEvent { ConditionData = data });
+      }
+     ```
